@@ -20,3 +20,12 @@ The way the original code and the refactored code loop through the 3,000 rows is
 
 The refactored code loops through all 3,000 rows, but only needs to do it one time. The code recognizes where a new stock begins and stores all current stock information in its own *separate* array value before moving on to the next. When the entire loop is complete, it then prints all of the saved array values to a separate sheet. When looping through the stocks, the original code is likely working 12 times harder.
 ## Summary
+While the produced results cut the execution time to a small fraction, refactoring code should not necessarily be performed on all code. Multiple aspects must be considered when deciding if refactoring is the correct decision to make, or at least appears worthwhile.
+  - There is no way to tell how long the refactoring will take (think 'opportunity cost').
+  - How much is to be invested in the task before it becomes a financial burden.
+  - Does this section of code *need* to be refactored? (for instance, is it only used once a year to perform simple tasks?)
+  - Will the end result prove to be more efficient?
+
+Determining if refactoring code is worthwhile is partially subjective, though in a business environment it may be worthwhile to perform financial anaylsis including forecasts to weigh the options. Understanding that neat, tidy, and efficient code is what all code *should* be, sometimes there simply isn't a strong enough demand or resources to effect that change.
+
+In this case, the refactored VBA script was able to consistently process the results around 8 times faster. If this code is of importance to the user, this is a substantial change. The refactored code is neater and no longer uses a nested 'for loop', which may otherwise more easily confuse someone reading the code. One notable disadvantage was the time it took to produce effective code. The first attempts actually ran slower than the original (roughly 0.85 seconds). In total, roughly 10 hours were spent producing and debugging it until the end result was produced. Depending on the scale of how the refactored code will be used, it may have absolutely been worthwhile, even considering the time investment needed to make it function.
