@@ -4,3 +4,19 @@ Having learned the basics of VBA and how it can be applied to the comb through t
 
 The original and refactored macros scan through the stock data tabulated for years 2017 and 2018, both of which contain over 3,000 rows of data. With the click of a "run" button, the macro would determine the starting and ending price for each of the 12 stocks for the year and subsequently calculate the return. It would then tabulate the total volume traded. All of this information would then be printed on a separate sheet in a comprehensive format. The goal is for the refactored code to produce the same results which were performed in the sub titled, "AllStocksAnalysis()", located in the Module 1 macro of file, "VBA_Challenge.xlsm". In the same file, Module 3 holds our refactored code.
 ## Results
+To be sure the measurements were fair, both macros incorporated a timer function that would begin after the desired year of analysis was determined, which would then stop and provide a message box with the results at the very end of the macro.
+### Original Macro (Module 1 - Sub "AllStocksAnalysis()")
+![All_Stocks_2017](https://user-images.githubusercontent.com/92493572/140650660-cec8bf3c-05c4-46ab-adb8-8bd77a1f404a.png)
+![All_Stocks_2018](https://user-images.githubusercontent.com/92493572/140650665-2f5b053d-3536-44de-aaee-aec3f48688aa.png)
+
+As seen above, the execution time appears very quick, but let's compare that to the refactored version.
+### Refactored Macro (Module 3 - Sub "AllStocksAnalysisRefactored()")
+![VBA_Challenge_2017](https://user-images.githubusercontent.com/92493572/140650847-2fcd4407-ac51-4be2-8be6-5b667c4328b6.png)
+![VBA_Challenge_2018](https://user-images.githubusercontent.com/92493572/140650848-6dffbf49-7d00-48db-b3e6-29e9da4af943.png)
+
+The refactored code performed the same task much faster. In fact, the refactored code was 7.8 times faster at running the 2017 data, while it was exactly 8 times faster at running the 2018 data. This was determined by dividing the original run time by the refactored run time for the respective years.
+### Causes of the Results
+The way the original code and the refactored code loop through the 3,000 rows is where the change in speed comes from. The original code will scan all 3,000 rows looking to tabulate information for one stock. After it completes that task, it changes to the next stock and cycles through all 3,000 rows *again*. As there are 12 stocks (fortunately only 12) in the dataset, it loops through 3,000 rows 12 times. This proves to be a lot of extra work the computer needs to perform. Before it cycles to the next loop it prints the results on to a separate sheet.
+
+The refactored code loops through all 3,000 rows, but only needs to do it one time. The code recognizes where a new stock begins and stores all current stock information in its own *separate* array value before moving on to the next. When the entire loop is complete, it then prints all of the saved array values to a separate sheet. When looping through the stocks, the original code is likely working 12 times harder.
+## Summary
